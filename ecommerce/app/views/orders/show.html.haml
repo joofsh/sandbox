@@ -1,0 +1,47 @@
+%h1 Your Order
+
+%table
+  %tr
+    %td.theader Customer:
+    %td #{@order.customer_id}
+  %tr
+    %td.theader Status:
+    %td #{@order.status}
+  %tr
+    %td.theader Item Count:
+    %td.numbers.stock #{@order.order_items.count}
+  %tr
+    %th
+  %tr
+    %th
+    %th Product
+    %th Price
+    %th Quantity
+    %th Subtotal
+
+  - @order.order_items.each do |a|
+    %tr
+      %td= image_tag("products/#{Product.find(a.product_id).image_url}", :size => "50x50")
+      %td= Product.find(a.product_id).title
+      %td.numbers.price.cwidth= print_price(Product.find(a.product_id).price)
+      %td.numbers.stock
+        = form_for a do |f|
+          %span
+            =raw "#{f.number_field :quantity} #{f.submit :Update}"
+      %td.numbers= print_price(a.subtotal)
+      %td= link_to "Remove", order_item_path(a.id), :method => :delete
+  %tr
+    %td.invis
+    %td.invis
+    %td.invis
+    %td.invis
+    %td.theader Total
+    %td.theader= print_price(@order.total)
+
+
+%br
+%p.button
+  = link_to "Continue Shopping", products_path()
+  |
+  = link_to "Empty Cart", @order, :confirm => 'Are you sure?', :method => :delete
+

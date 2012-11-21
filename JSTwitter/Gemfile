@@ -1,0 +1,6 @@
+source :rubygems
+
+gem "klout",  "~>3.0.1"
+gem "pry"
+gem "bitly"
+gem "jumpstart_auth"

@@ -1,0 +1,32 @@
+<%= form_for(@article, :html => {:multipart => true}) do |f| %>
+    <p>
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :body %><br />
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.label :tag_list, "Tag your article"%><br />
+      <%= f.text_area :tag_list %>
+
+    </p>
+
+    <p>
+      <% if @article.image_file_name %>
+          Attached Image:
+        <%= image_tag @article.image.url(:thumb) %>   <br />  <br />
+          <%= f.label :image, "Attach a new Image" %>  <br />
+             <% else %>
+          <%= f.label :image, "Attach an Image" %>  <br />
+      <% end %>
+          <%= f.file_field :image %>
+
+
+
+    </p>
+    <p>
+      <%= f.submit :Save %>
+    </p>
+<% end %>

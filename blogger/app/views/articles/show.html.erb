@@ -1,0 +1,28 @@
+<h1><%= @article.title %></h1>
+<p>  Tags: <%= tag_links(@article.tags) %></p>
+
+
+
+<% if @article.image_file_name %>
+<%= image_tag @article.image.url(:medium) %>
+<% end %>
+
+  <%= @article.body %></p>
+<p> Written by: <%= @article.article_author %></p>
+<p> View count: <%= @article.view_count %> </p>
+<p><br /><br /></p>
+<%= link_to "<< Back to Articles List", articles_path %>
+   <br />
+ <p>
+   <% if current_user.username == @article.article_author %>
+<%= link_to "Delete", article_path(@article), :method => :delete, :confirm =>"Really delete this article?" %>
+<%=  link_to "Edit", edit_article_path(@article) %>
+     <% end %>
+ </p>
+
+<h3>Comments <%= @article.comments.size %></h3>
+<%= render :partial => 'comment', :collection => @article.comments %>
+
+
+<%= render :partial => 'comment_form' %>
+

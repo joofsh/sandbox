@@ -1,0 +1,6 @@
+= form_for self do |f|
+  %span
+    = f.label :quantity
+    %br/
+    = f.number_field :quantity
+  %span= f.submit :Update
