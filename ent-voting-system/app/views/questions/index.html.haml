@@ -1,0 +1,8 @@
+:javascript
+  $(function() {
+    window.router = new EntVotingSystem.Routers.QuestionsRouter({questions: #{@questions.to_json.html_safe}});
+    Backbone.history.start();
+  });
+
+#questions
+%p= link_to "Return to homepage", root_path
